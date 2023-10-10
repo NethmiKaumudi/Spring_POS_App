@@ -1,5 +1,5 @@
 // validation for item
-const ITEM_CODE_REGEX = /^(I00-)[0-9]{3}$/;
+const ITEM_CODE_REGEX = /^(I)[0-9]{3}$/;
 const ITEM_NAME_REGEX = /^[A-Za-z ]{3,}$/;
 const ITEM_QTY_REGEX = /^[0-9]+$/;
 const ITEM_PRICE_REGEX = /^[0-9]{2,}([.][0-9]{2})?$/;

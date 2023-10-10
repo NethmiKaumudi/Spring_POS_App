@@ -1,12 +1,14 @@
-const BASE_URL = "http://localhost:8080/Spring_Data_JPA_war/";
+const BASE_URL = "http://localhost:8080/Spring_Pos_Back_End/";
 
 //load all existing customers
 getAllCustomers();
 
 //add customer event
 $("#btnCustomer").click(function () {
+    let id = $("#txtCustomerID").val();
+
     if (checkAll()) {
-        saveCustomer();
+        saveCustomer(id);
     } else {
         alert("Error");
     }
@@ -68,11 +70,10 @@ $("#btn-clear1").click(function () {
 
 
 // CRUD operation Functions
-function saveCustomer() {
-    let customerID = $("#txtCustomerID").val();
-    //check customer is exists or not?
-    if (searchCustomer(customerID.trim()) == undefined) {
-
+function saveCustomer(id) {
+    // check customer is exists or not?
+    console.log(searchCustomer(id.trim()) == undefined);
+    if (searchCustomer(id.trim()) == undefined) {
         let formData = $("#customerForm").serialize();
         $.ajax({
             url: BASE_URL + "customer",
@@ -87,7 +88,7 @@ function saveCustomer() {
                 getAllCustomers();
             },
             error: function (error) {
-                alert(error.responseJSON.message);
+                alert(error.message);
             }
         });
 
@@ -105,9 +106,9 @@ function getAllCustomers() {
     $.ajax({
         url: BASE_URL + 'customer',
         dataType: "json",
-        headers:{
-            Auth:"user=admin,pass=admin"
-        },
+        // headers:{
+        //     Auth:"user=admin,pass=admin"
+        // },
         success: function (response) {
             let customers = response.data;
             for (let i in customers) {
@@ -122,7 +123,7 @@ function getAllCustomers() {
             bindTrEvents();
         },
         error: function (error) {
-            alert(error.responseJSON.message);
+            alert(error.message);
         }
     });
 }
@@ -131,9 +132,9 @@ function deleteCustomer(id) {
     $.ajax({
         url: BASE_URL + 'customer?cusID=' + id,
         method: 'delete',
-        headers:{
-            Auth:"user=admin,pass=admin"
-        },
+        // headers:{
+        //     Auth:"user=admin,pass=admin"
+        // },
         success: function (resp) {
             alert(resp.message);
             getAllCustomers();
@@ -141,7 +142,7 @@ function deleteCustomer(id) {
             return true;
         },
         error: function (error) {
-            alert(error.responseJSON.message);
+            alert(error.message);
             return false;
         }
     });
@@ -166,8 +167,8 @@ function searchCustomer(id) {
 
         },
         error: function (error) {
-            resp=false;
-            alert(error.responseJSON.message);
+            resp = false;
+            alert(error.message);
         }
     });
     return resp;
@@ -193,9 +194,9 @@ function updateCustomer(id) {
             $.ajax({
                 url: BASE_URL + 'customer',
                 method: 'put',
-                headers:{
-                    Auth:"user=admin,pass=admin"
-                },
+                // headers:{
+                //     Auth:"user=admin,pass=admin"
+                // },
                 contentType: "application/json",
                 data: JSON.stringify(customer),
                 success: function (resp) {
@@ -204,7 +205,7 @@ function updateCustomer(id) {
                     clearCustomerInputFields();
                 },
                 error: function (error) {
-                    alert(error.responseJSON.message);
+                    alert(error.message);
                 }
             });
         }
