@@ -103,8 +103,8 @@ $("#selectItemCode").change(function () {
     let res = searchItem(code);
     if (res.length > 0) {
         $("#txtItemDescription").val(res[0].description);
-        $("#txtItemPrice").val(res[0].unitPrice);
         $("#txtQTYOnHand").val(res[0].qty);
+        $("#txtItemPrice").val(res[0].unitPrice);
     }
 });
 
@@ -135,7 +135,7 @@ $("#btnSubmitOrder").click(function () {
 
     //send request
     $.ajax({
-        url: BASE_URL + "purchase_order",
+        url: BASE_URL + "place_order",
         method: "post",
         dataType: "json",
         headers:{

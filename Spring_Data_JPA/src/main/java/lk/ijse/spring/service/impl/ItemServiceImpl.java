@@ -27,6 +27,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void addItem(ItemDTO dto) {
+
         itemRepo.save(mapper.map(dto, Item.class));
     }
 

@@ -78,9 +78,9 @@ function saveCustomer(id) {
         $.ajax({
             url: BASE_URL + "customer",
             method: "post",
-            // headers:{
-            //     Auth:"user=admin,pass=admin"
-            // },
+            headers:{
+                Auth:"user=admin,pass=admin"
+            },
             data: formData,
             success: function (res) {
                 alert(res.message);
@@ -106,9 +106,9 @@ function getAllCustomers() {
     $.ajax({
         url: BASE_URL + 'customer',
         dataType: "json",
-        // headers:{
-        //     Auth:"user=admin,pass=admin"
-        // },
+        headers:{
+            Auth:"user=admin,pass=admin"
+        },
         success: function (response) {
             let customers = response.data;
             for (let i in customers) {
@@ -153,9 +153,9 @@ function searchCustomer(id) {
     $.ajax({
         url: BASE_URL + 'customer',
         dataType: "json",
-        // headers:{
-        //     Auth:"user=admin,pass=admin"
-        // },
+        headers:{
+            Auth:"user=admin,pass=admin"
+        },
         async: false,
         success: function (response) {
             let customers = response.data;
@@ -194,9 +194,9 @@ function updateCustomer(id) {
             $.ajax({
                 url: BASE_URL + 'customer',
                 method: 'put',
-                // headers:{
-                //     Auth:"user=admin,pass=admin"
-                // },
+                headers:{
+                    Auth:"user=admin,pass=admin"
+                },
                 contentType: "application/json",
                 data: JSON.stringify(customer),
                 success: function (resp) {
