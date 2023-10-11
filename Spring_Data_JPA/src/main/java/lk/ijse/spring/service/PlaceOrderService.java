@@ -6,6 +6,6 @@ import lk.ijse.spring.dto.OrdersDTO;
 public interface PlaceOrderService {
     void placeOrder(OrdersDTO dto);
 
-    void SearchOrder(String oid);
+    OrdersDTO SearchOrder(String oid);
 
 }

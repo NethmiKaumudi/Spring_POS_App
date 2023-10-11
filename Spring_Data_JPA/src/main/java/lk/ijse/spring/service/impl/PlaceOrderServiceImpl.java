@@ -1,6 +1,5 @@
 package lk.ijse.spring.service.impl;
 
-import lk.ijse.spring.dto.ItemDTO;
 import lk.ijse.spring.dto.OrderDetailsDTO;
 import lk.ijse.spring.dto.OrdersDTO;
 import lk.ijse.spring.entity.Item;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Service
 @Transactional
 public class PlaceOrderServiceImpl implements PlaceOrderService {
@@ -49,8 +49,9 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
     }
 
     @Override
-    public void SearchOrder(String oid) {
-        orderRepo.findById(oid);
+    public OrdersDTO SearchOrder(String oid) {
+        Orders orders = orderRepo.findById(oid).get();
+       return mapper.map(orders,OrdersDTO.class);
     }
 
 }
