@@ -13,9 +13,12 @@ import lk.ijse.spring.repo.OrderRepo;
 import lk.ijse.spring.service.PlaceOrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Service
+@Transactional
 public class PlaceOrderServiceImpl implements PlaceOrderService {
     @Autowired
     OrderRepo orderRepo;
@@ -30,8 +33,6 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
 
     @Override
     public void placeOrder(OrdersDTO dto) {
-//        customerRepo.findById(dto.getCusID());
-//        itemRepo.findById(itemDTO.getCode());
         if (!orderRepo.existsById(dto.getOid())) {
             Orders orders = mapper.map(dto, Orders.class);
             orderRepo.save(orders);
@@ -45,6 +46,11 @@ public class PlaceOrderServiceImpl implements PlaceOrderService {
                 item.setQtyOnHand(item.getQtyOnHand() - orderDetails.get(i).getQty());
             }
         }
+    }
+
+    @Override
+    public void SearchOrder(String oid) {
+        orderRepo.findById(oid);
     }
 
 }

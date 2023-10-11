@@ -1,4 +1,3 @@
-
 //load all items from the database
 loadAllItems();
 loadAllCustomers();
@@ -9,8 +8,8 @@ function loadAllItems() {
     $("#selectItemCode").empty();
     $.ajax({
         url: BASE_URL + "item",
-        headers:{
-            Auth:"user=admin,pass=admin"
+        headers: {
+            Auth: "user=admin,pass=admin"
         },
         success: function (res) {
             for (let c of res.data) {
@@ -30,8 +29,8 @@ function loadAllCustomers() {
     $.ajax({
         url: BASE_URL + "customer",
         dataType: "json",
-        headers:{
-            Auth:"user=admin,pass=admin"
+        headers: {
+            Auth: "user=admin,pass=admin"
         },
         success: function (resp) {
             console.log(resp);
@@ -53,8 +52,8 @@ function searchCustomer(cusID) {
         url: BASE_URL + "customer",
         dataType: "json",
         async: false,
-        headers:{
-            Auth:"user=admin,pass=admin"
+        headers: {
+            Auth: "user=admin,pass=admin"
         },
         success: function (resp) {
             response = resp.data.filter((c) => {
@@ -71,8 +70,8 @@ function searchItem(code) {
         url: BASE_URL + "item",
         dataType: "json",
         async: false,
-        headers:{
-            Auth:"user=admin,pass=admin"
+        headers: {
+            Auth: "user=admin,pass=admin"
         },
         success: function (resp) {
             response = resp.data.filter((i) => {
@@ -103,7 +102,7 @@ $("#selectItemCode").change(function () {
     let res = searchItem(code);
     if (res.length > 0) {
         $("#txtItemDescription").val(res[0].description);
-        $("#txtQTYOnHand").val(res[0].qty);
+        $("#txtQTYOnHand").val(res[0].qtyOnHand);
         $("#txtItemPrice").val(res[0].unitPrice);
     }
 });
@@ -138,8 +137,8 @@ $("#btnSubmitOrder").click(function () {
         url: BASE_URL + "place_order",
         method: "post",
         dataType: "json",
-        headers:{
-            Auth:"user=admin,pass=admin"
+        headers: {
+            Auth: "user=admin,pass=admin"
         },
         data: JSON.stringify(ob),
         contentType: "application/json",
@@ -163,12 +162,12 @@ function getItemDetails() {
         let avQty = $("#orderTable").children().eq(i).children(":eq(3)").text();
         let itQty = $("#orderTable").children().eq(i).children(":eq(4)").text();
         let itPrice = $("#orderTable").children().eq(i).children(":eq(2)").text();
-        array.push({code: itCode,avQty:avQty, qty: itQty, price: itPrice});
+        array.push({code: itCode, avQty: avQty, qty: itQty, price: itPrice});
     }
     return array;
 }
 
-function clearAllPOTexts(){
+function clearAllPOTexts() {
     $("#orderTable").empty();
     $("#txtOrderID").val("");
     $("#orderCustomerName").val("");
